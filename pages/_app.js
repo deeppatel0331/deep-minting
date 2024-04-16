@@ -1,4 +1,8 @@
 import { createGlobalStyle } from "styled-components";
+import {
+  ThirdwebProvider,
+} from "thirdweb/react";
+
 
 export const GlobalStyle = createGlobalStyle`
   *{
@@ -12,8 +16,12 @@ export const GlobalStyle = createGlobalStyle`
 export default function App({ Component, pageProps }) {
   return (
     <>
-        <GlobalStyle />
-        <Component {...pageProps} />
+
+      <ThirdwebProvider>
+      <GlobalStyle />
+      <Component {...pageProps} />
+
+      </ThirdwebProvider>
     </>
   );
 }

@@ -1,6 +1,30 @@
 import React, { useRef } from 'react'
 import {styled,keyframes} from 'styled-components';
 import Navbar from "@/components/Navbar";
+import {
+  ConnectButton,
+} from "thirdweb/react";
+import {
+  createWallet,
+  walletConnect,
+  inAppWallet,
+} from "thirdweb/wallets";
+
+const wallets = [
+  createWallet("io.metamask"),
+  createWallet("com.coinbase.wallet"),
+  walletConnect(),
+  inAppWallet({
+    auth: {
+      options: [
+        "email",
+        "google",
+        "apple",
+        "facebook",
+      ],
+    },
+  }),
+];
 
 /*
 * This page allows users to connect their wallet and interact with the blockchain
@@ -15,7 +39,11 @@ return (
         <CenteringContainer>
       <Container>
         <Title>Connect Wallet</Title>
-        <Button>CONNECT</Button>
+        <ConnectButton
+          wallets={wallets}
+          theme={"dark"}
+          connectModal={{ size: "wide" }}
+        />
       </Container>
       </CenteringContainer>
     </Wrapper>
@@ -59,6 +87,7 @@ const Container = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   animation: ${fade} 1.5s ease;
+  text-align: center;
 `;
 
 // for the title
