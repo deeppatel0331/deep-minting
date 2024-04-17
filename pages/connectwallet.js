@@ -9,6 +9,11 @@ import {
   walletConnect,
   inAppWallet,
 } from "thirdweb/wallets";
+import { createThirdwebClient } from "thirdweb";
+
+const client = createThirdwebClient({
+  clientId: "7147dfaf6751959fc9941897d57bf10a",
+});
 
 const wallets = [
   createWallet("io.metamask"),
@@ -40,6 +45,7 @@ return (
       <Container>
         <Title>Connect Wallet</Title>
         <ConnectButton
+          client={client}
           wallets={wallets}
           theme={"dark"}
           connectModal={{ size: "wide" }}

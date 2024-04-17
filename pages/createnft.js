@@ -2,13 +2,18 @@ import { useRef, useEffect } from 'react'
 import React from 'react'
 import Navbar from "@/components/Navbar";
 import {styled,keyframes} from 'styled-components';
+//import { useSigner } from "@thirdweb-dev/react";
 
 /*
 * This page is for users to create their own custome NFT
 */
 
-const adminPage = () => {
+//put the inputs into a json
+//upload the json to a decentralized storage (thirdweb storage)
+//give the uri to the mint function of the contract
 
+const adminPage = () => {
+    //const signer = useSigner();
     const Input1Ref = useRef();
     const Input2Ref = useRef();
     const Input3Ref = useRef();
@@ -17,6 +22,12 @@ const adminPage = () => {
         const input1 = Input1Ref.current.value;
         const input2 = Input2Ref.current.value;
         const input3 = Input3Ref.current.value;
+        const nftjson = {
+          //owner: signer,
+          word1: input1,
+          word2: input2,
+          word3: input3,
+        }
         console.log(input1);
         console.log(input2);
         console.log(input3);

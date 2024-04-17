@@ -1,6 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useRouter } from "next/router";
+import {
+    ConnectButton,
+  } from "thirdweb/react";
+  import {
+    createWallet,
+    walletConnect,
+    inAppWallet,
+  } from "thirdweb/wallets";
+  import { createThirdwebClient } from "thirdweb";
+  
+  const client = createThirdwebClient({
+    clientId: "7147dfaf6751959fc9941897d57bf10a",
+  });
+  
+  const wallets = [
+    createWallet("io.metamask"),
+    createWallet("com.coinbase.wallet"),
+    walletConnect(),
+    inAppWallet({
+      auth: {
+        options: [
+          "email",
+          "google",
+          "apple",
+          "facebook",
+        ],
+      },
+    }),
+  ];
 
 /*
 * This is the code for the Navigation Bar that is found on all of the pages of the website.
@@ -51,9 +80,13 @@ export const Navbar = () => {
                 Create NFT
             </NavigationElement>
 
-            <NavigationElement onClick={goToConnectPage}>
-                Connect Wallet
-            </NavigationElement>
+            <ConnectButton
+            client={client}
+            wallets={wallets}
+            theme={"dark"}
+            connectModal={{ size: "wide" }}
+            />
+            
 
         </NavigationButtonHolder>
 
@@ -87,7 +120,7 @@ const NavigationButtonHolder = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30vw;
+    width: 35vw;
     gap: 1vw
 `
 
