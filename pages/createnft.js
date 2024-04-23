@@ -41,14 +41,14 @@ const adminPage = () => {
             <Container>
             <Title>Create A Custom NFT</Title>
 
-            <InputLabel>Word 1:</InputLabel>
-            <TimeInput ref={Input1Ref} placeholder='Enter keyword' />
+            <InputLabel>Address:</InputLabel>
+            <TimeInput ref={Input1Ref} placeholder='Enter wallet address' />
 
-            <InputLabel>Word 2:</InputLabel>
-            <TimeInput ref={Input2Ref} placeholder='Enter keyword' />
+            <InputLabel>Image URL:</InputLabel>
+            <TimeInput ref={Input2Ref} placeholder='Enter image url' />
 
-            <InputLabel>Word 3:</InputLabel>
-            <TimeInput ref={Input3Ref} placeholder='Enter keyword' />
+            <InputLabel>NFT Name:</InputLabel>
+            <TimeInput ref={Input3Ref} placeholder='Enter NFT name' />
 
             <Spacer />
 
