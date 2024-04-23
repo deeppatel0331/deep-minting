@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
-import {
-  ThirdwebProvider,
-} from "thirdweb/react";
+import { ThirdwebProvider } from "thirdweb/react";
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -19,8 +17,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
     <Head><link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet' /></Head>
+    <GlobalStyle />
       <ThirdwebProvider>
-      <GlobalStyle />
       <Component {...pageProps} />
       </ThirdwebProvider>
     </>

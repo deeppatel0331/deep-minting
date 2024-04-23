@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@thirdweb-dev/react": "^4.6.6",
+    "@thirdweb-dev/sdk": "^4.0.67",
     "analytics": "^0.8.11",
+    "ethers": "^5.7.2",
     "firebase": "^10.8.0",
     "next": "^14.1.0",
     "react": "^18",

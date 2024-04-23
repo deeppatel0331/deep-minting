@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import React from 'react'
 import Navbar from "@/components/Navbar";
 import {styled,keyframes} from 'styled-components';
-//import { useSigner } from "@thirdweb-dev/react";
+import { useStorage, useAddress, useSigner } from 'thirdweb/react';
 
 /*
 * This page is for users to create their own custome NFT
@@ -18,15 +18,18 @@ const adminPage = () => {
     const Input2Ref = useRef();
     const Input3Ref = useRef();
 
+    //for thirdweb storage purposes:
+    //const storage = useStorage();
+
     const Enter = () => {
         const input1 = Input1Ref.current.value;
         const input2 = Input2Ref.current.value;
         const input3 = Input3Ref.current.value;
         const nftjson = {
           //owner: signer,
-          word1: input1,
-          word2: input2,
-          word3: input3,
+          address: input1,
+          projectUrl: input2,
+          projectName: input3,
         }
         console.log(input1);
         console.log(input2);
@@ -37,7 +40,7 @@ const adminPage = () => {
         <Wrapper>
           <Navbar />
           <CenteringContainer>
-          <Description>Enter 3 words that you want to be represented as an NFT</Description>
+          <Description> Your guide to a brand new work of art</Description>
             <Container>
             <Title>Create A Custom NFT</Title>
 
