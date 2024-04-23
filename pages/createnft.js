@@ -2,17 +2,20 @@ import { useRef, useEffect } from 'react'
 import React from 'react'
 import Navbar from "@/components/Navbar";
 import {styled,keyframes} from 'styled-components';
-import { useStorage, useAddress, useSigner } from 'thirdweb/react';
+import { useStorage, useAddress, useSigner } from '@thirdweb-dev/react';
 
 /*
-* This page is for users to create their own custome NFT
+* This page is for users to create their own custom NFT
+* This page is meant to interact with my functioning smart contract
 */
 
+// STEPS FOR INTERACTING WITH SMART CONTRACT
 //put the inputs into a json
 //upload the json to a decentralized storage (thirdweb storage)
 //give the uri to the mint function of the contract
 
 const adminPage = () => {
+  
     //const signer = useSigner();
     const Input1Ref = useRef();
     const Input2Ref = useRef();
