@@ -1,42 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useRouter } from "next/router";
-import {
-    ConnectButton,
-  } from "thirdweb/react";
-  import {
-    createWallet,
-    walletConnect,
-    inAppWallet,
-  } from "thirdweb/wallets";
-  import { createThirdwebClient } from "thirdweb";
-  
-  const client = createThirdwebClient({
-    clientId: "7147dfaf6751959fc9941897d57bf10a",
-  });
-  
-  const wallets = [
-    createWallet("io.metamask"),
-    createWallet("com.coinbase.wallet"),
-    walletConnect(),
-    inAppWallet({
-      auth: {
-        options: [
-          "email",
-          "google",
-          "apple",
-          "facebook",
-        ],
-      },
-    }),
-  ];
-
+import { ConnectWallet } from '@thirdweb-dev/react';
 /*
 * This is the code for the Navigation Bar that is found on all of the pages of the website.
 * It is used to display the name of the website and provide buttons to navigate to different parts of the website.
 */
 
 export const Navbar = () => {
+
+    const [ loaded, setLoaded ] = useState(false)
+
+    useEffect(() => {setLoaded(true)}, []);
 
     //gives the buttons the functionality to go to the corresponding page when clicked
     const router = useRouter();
@@ -80,13 +55,9 @@ export const Navbar = () => {
                 Create NFT
             </NavigationElement>
 
-            <ConnectButton
-            client={client}
-            wallets={wallets}
-            theme={"dark"}
-            connectModal={{ size: "wide" }}
-            />
-            
+            <NavigationElement>
+               { loaded && <ConnectWallet theme={'light'} />}
+            </NavigationElement>
 
         </NavigationButtonHolder>
 

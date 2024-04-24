@@ -22,7 +22,7 @@ const adminPage = () => {
     const Input3Ref = useRef();
 
     //for thirdweb storage purposes:
-    //const storage = useStorage();
+    const storage = useStorage();
 
     const Enter = () => {
         const input1 = Input1Ref.current.value;

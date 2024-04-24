@@ -1,38 +1,11 @@
 import React, { useRef } from 'react'
 import {styled,keyframes} from 'styled-components';
 import Navbar from "@/components/Navbar";
-import {
-  ConnectButton,
-} from "thirdweb/react";
-import {
-  createWallet,
-  walletConnect,
-  inAppWallet,
-} from "thirdweb/wallets";
-import { createThirdwebClient } from "thirdweb";
-
-const client = createThirdwebClient({
-  clientId: "7147dfaf6751959fc9941897d57bf10a",
-});
-
-const wallets = [
-  createWallet("io.metamask"),
-  createWallet("com.coinbase.wallet"),
-  walletConnect(),
-  inAppWallet({
-    auth: {
-      options: [
-        "email",
-        "google",
-        "apple",
-        "facebook",
-      ],
-    },
-  }),
-];
+// import { ConnectButton } from "@thirdweb-dev/react";
 
 /*
 * This page allows users to connect their wallet and interact with the blockchain
+* 7147dfaf6751959fc9941897d57bf10a
 */
 
 const Login = () => {
@@ -44,12 +17,7 @@ return (
         <CenteringContainer>
       <Container>
         <Title>Connect Wallet</Title>
-        <ConnectButton
-          client={client}
-          wallets={wallets}
-          theme={"dark"}
-          connectModal={{ size: "wide" }}
-        />
+        <ConnectButton />
       </Container>
       </CenteringContainer>
     </Wrapper>
