@@ -10,6 +10,10 @@ import contractabi from '@/contractabi.json';
 /*
 * This page is for users to create their own custom NFT
 * This page is meant to interact with my functioning smart contract
+
+* This is where my project does 2 writes to the blockchain:
+    1.) it writes the name of the NFT
+    2.) it writes the URI to thirdweb storage for the NFT
 */
 
 // STEPS FOR INTERACTING WITH SMART CONTRACT
@@ -37,6 +41,7 @@ const adminPage = () => {
           projectName: input2,
         }
         
+        //executes the safeMint function from my smart contract
         try {
           if (!signer) {
             console.error("Signer not available");

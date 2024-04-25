@@ -6,11 +6,21 @@ import contractabi from '@/contractabi.json';
 import { styled, keyframes } from 'styled-components';
 import Navbar from "@/components/Navbar";
 
+/*
+* This page displays the names of the NFTs that the connected wallet owns
+* It provides the user with directions on how to access the entire information
+
+* This is the part of my project that does 2 reads from the blockchain:
+    1.) it reads the users tokens/address to access the NFT names
+    2.) it reads the users NFT names themselves and displays them on the website
+*/
+
 const TokensPage = () => {
     const [ownedTokens, setOwnedTokens] = useState([]);
     const [isSignedIn, setIsSignedIn] = useState(false);
     const signer = useSigner();
 
+    //Ensuring that the user is signed in
     useEffect(() => {
         if (signer) {
             setIsSignedIn(true);
@@ -19,6 +29,7 @@ const TokensPage = () => {
         }
     }, [signer]);
 
+    //reading from the blockchain and getting the required information
     useEffect(() => {
         const fetchOwnedTokenNames = async () => {
             try {
