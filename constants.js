@@ -1,1 +1,1 @@
-export const myContract = "0x4C045cE80b83AB30D0534011837FaF8489C79cbC"
+export const myContract = "0x60154845E942441012dCa56d72e0A859D136782C"

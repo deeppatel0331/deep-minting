@@ -3,7 +3,7 @@ import { useSigner } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 import { myContract } from '@/constants';
 import contractabi from '@/contractabi.json';
-import { styled } from 'styled-components';
+import { styled, keyframes } from 'styled-components';
 import Navbar from "@/components/Navbar";
 
 const TokensPage = () => {
@@ -14,6 +14,8 @@ const TokensPage = () => {
     useEffect(() => {
         if (signer) {
             setIsSignedIn(true);
+        } else {
+            setIsSignedIn(false);
         }
     }, [signer]);
 
@@ -43,11 +45,15 @@ const TokensPage = () => {
             <Navbar />
             <CenteringContainer>
                 <Title>Owned Tokens</Title>
-                <TokenList>
-                    {ownedTokens.map((tokenName, index) => (
-                        <TokenItem key={index}>{tokenName}</TokenItem>
-                    ))}
-                </TokenList>
+                {isSignedIn ? (
+                    <TokenList>
+                        {ownedTokens.map((tokenName, index) => (
+                            <TokenItem key={index}>{tokenName}</TokenItem>
+                        ))}
+                    </TokenList>
+                ) : (
+                    <InfoMessage>Please connect your wallet to see your collection</InfoMessage>
+                )}
                 {isSignedIn && (
                     <InfoMessage>
                         Visit the following website to see all proper information about your collection and paste your wallet address into the search bar:
@@ -59,6 +65,18 @@ const TokensPage = () => {
     );
 };
 
+//animation for cool effects
+const fade2 = keyframes`
+    from{
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+`
 
 // Styling components...
 const Wrapper = styled.div`
@@ -66,6 +84,7 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
+//allows the contents to be centered for visual appeal
 const CenteringContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,20 +95,25 @@ const CenteringContainer = styled.div`
   height: 85.56vh;
 `;
 
+//the title of the page
 const Title = styled.h1`
   font-size: 30px;
   font-family: 'Sans-Serif';
-  color: white;
+  font-weight: bold;
+  color: red;
   text-align: center;
   margin-bottom: 20px;
+  animation: ${fade2} 1s ease;
 `;
 
+//displays my message that informs the user to visit a website to see all information
 const InfoMessage = styled.p`
   font-size: 20px;
   font-family: 'Sans-Serif';
   color: #00BFFF;
   text-align: center;
   margin-top: 20px;
+  animation: ${fade2} 1s ease;
 
   a {
     color: #00BFFF;
@@ -99,11 +123,12 @@ const InfoMessage = styled.p`
 
 const TokenList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 0;
   margin: 0;
   list-style-type: none;
+  animation: ${fade2} 1s ease;
 `;
 
 const TokenItem = styled.li`
