@@ -1,8 +1,11 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import React from 'react'
 import Navbar from "@/components/Navbar";
 import {styled,keyframes} from 'styled-components';
 import { useStorage, useAddress, useSigner } from '@thirdweb-dev/react';
+import { ethers } from 'ethers';
+import { myContract } from '@/constants';
+import contractabi from '@/contractabi.json';
 
 /*
 * This page is for users to create their own custom NFT
@@ -15,28 +18,41 @@ import { useStorage, useAddress, useSigner } from '@thirdweb-dev/react';
 //give the uri to the mint function of the contract
 
 const adminPage = () => {
-  
+
+  const [mintedMessage, setMintedMessage] = useState("");
     //const signer = useSigner();
     const Input1Ref = useRef();
     const Input2Ref = useRef();
     const Input3Ref = useRef();
 
-    //for thirdweb storage purposes:
-    const storage = useStorage();
+    const signer = useSigner();
 
-    const Enter = () => {
+    const Enter = async () => {
         const input1 = Input1Ref.current.value;
         const input2 = Input2Ref.current.value;
         const input3 = Input3Ref.current.value;
         const nftjson = {
-          //owner: signer,
           address: input1,
-          projectUrl: input2,
-          projectName: input3,
+          projectUrl: input3,
+          projectName: input2,
         }
-        console.log(input1);
-        console.log(input2);
-        console.log(input3);
+        
+        try {
+          if (!signer) {
+            console.error("Signer not available");
+            setMintedMessage("ERROR: Please connect your wallet");
+            return;
+          }
+          const contract = new ethers.Contract(myContract, contractabi, signer);
+          const func = await contract.safeMint(input1, input3, input2);
+          await func.wait();
+
+          console.log("DONE SUCCESSFULLY");
+          setMintedMessage("NFT minted successfully!"); //displays a message when the user successfully mints an NFT
+        }catch (error){
+          console.error("Error", error);
+          setMintedMessage("ERROR: Make sure the fields are filled in with the proper requirements");
+        }
     }
 
     return (
@@ -50,21 +66,28 @@ const adminPage = () => {
             <InputLabel>Address:</InputLabel>
             <TimeInput ref={Input1Ref} placeholder='Enter wallet address' />
 
-            <InputLabel>Image URL:</InputLabel>
-            <TimeInput ref={Input2Ref} placeholder='Enter image url' />
-
             <InputLabel>NFT Name:</InputLabel>
             <TimeInput ref={Input3Ref} placeholder='Enter NFT name' />
+
+            <InputLabel>Image URL:</InputLabel>
+            <TimeInput ref={Input2Ref} placeholder='Enter image url' />
 
             <Spacer />
 
             <UpdateButton onClick={Enter}>CREATE</UpdateButton>
+
+            {mintedMessage && <MintedMessage>{mintedMessage}</MintedMessage>}
             </Container>
             </CenteringContainer>
         </Wrapper>
         );
     };
 
+const MintedMessage = styled.p`
+  color: green;
+  font-size: 16px;
+  margin-top: 10px;
+  `;
 
 //animation for cool effects
 const fade2 = keyframes`

@@ -1,0 +1,1 @@
+export const myContract = "0x4C045cE80b83AB30D0534011837FaF8489C79cbC"
