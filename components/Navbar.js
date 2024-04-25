@@ -28,8 +28,8 @@ export const Navbar = () => {
         router.push("/createnft")
     }
 
-    function goToConnectPage(){
-        router.push("/connectwallet")
+    function goToDisplayPage(){
+        router.push("/displaynft")
     }
 
 
@@ -53,6 +53,10 @@ export const Navbar = () => {
 
             <NavigationElement onClick={goToCreateNFTPage}>
                 Create NFT
+            </NavigationElement>
+
+            <NavigationElement onClick={goToDisplayPage}>
+                Collection
             </NavigationElement>
 
             <NavigationElement>
@@ -91,7 +95,7 @@ const NavigationButtonHolder = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35vw;
+    width: 45vw;
     gap: 1vw
 `
 
